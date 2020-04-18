@@ -1,4 +1,28 @@
 {
-    "streamlets": [],
-    "package": ""
+    "streamlets": [
+        {
+            "absClass": "applications.spark_environment.transformation.StreamStreamJoins",
+            "ports": [
+                "FileSystemIngressRecordout1",
+                "SqlBasedIngressRecordout1",
+                "StreamStreamJoinsRecordout1"
+            ],
+            "name": "StreamStreamJoins1"
+        },
+        {
+            "absClass": "applications.akka_environment.filesystem.FileSystemIngress",
+            "ports": [
+                "FileSystemIngressRecordout1"
+            ],
+            "name": "FileSystemIngress1"
+        },
+        {
+            "absClass": "applications.akka_environment.sqlbased.SqlBasedIngress",
+            "ports": [
+                "SqlBasedIngressRecordout1"
+            ],
+            "name": "SqlBasedIngress1"
+        }
+    ],
+    "package": "applications"
 }
