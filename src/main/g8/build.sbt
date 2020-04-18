@@ -1,21 +1,7 @@
 import sbt._
 import sbt.Keys._
 
-lazy val root =
-  Project(id = "root", base = file("."))
-    .enablePlugins(ScalafmtPlugin)
-    .settings(
-      name := "root",
-      scalafmtOnCompile := true,
-      skip in publish := true,
-    )
-    .withId("root")
-    .settings(commonSettings)
-    .aggregate(
-      `$name;format="norm"$`
-    )
-
-lazy val `$name;format="norm"$` =  appModule("$name$")
+lazy val `$name;format="norm"$` =  (project in file("."))
   .enablePlugins(CloudflowAkkaStreamsApplicationPlugin, CloudflowSparkApplicationPlugin)
   .settings(
     sourceGenerators in Compile += Def.taskDyn {
@@ -31,15 +17,6 @@ lazy val `$name;format="norm"$` =  appModule("$name$")
     name := "$name$"
     )
     .settings(commonSettings)
-
-  def appModule(moduleID: String): Project = {
-  Project(id = moduleID, base = file(moduleID))
-    .settings(
-      name := moduleID
-    )
-    .withId(moduleID)
-    .settings(commonSettings)
-}
 
 lazy val commonSettings = Seq(
   organization := "pencilerazer",
