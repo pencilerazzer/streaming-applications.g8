@@ -1,12 +1,18 @@
 import sbt._
 import sbt.Keys._
 
+lazy val codegen = project.settings(
+  libraryDependencies ++= Seq(
+    "org.scalameta" %% "scalameta" % "1.8.0",
+    "io.spray" %% "spray-json" % "1.3.5"
+  )
+)
+
 lazy val `$name;format="norm"$` =  (project in file("."))
   .enablePlugins(CloudflowAkkaStreamsApplicationPlugin, CloudflowSparkApplicationPlugin)
   .settings(
     sourceGenerators in Compile += Def.taskDyn {
-        val outFile = sourceManaged.in(Compile).value / "$name$" / "Generated.scala"
-        println(outFile)
+        val outFile = sourceManaged.in(Compile).value / "applications" / "Generated.scala"
         Def.task {
           (run in codegen in Compile)
             .toTask(" " + outFile.getAbsolutePath)
@@ -16,7 +22,17 @@ lazy val `$name;format="norm"$` =  (project in file("."))
       }.taskValue,
     name := "$name$"
     )
-    .settings(commonSettings)
+    .settings(
+      commonSettings,
+      resolvers ++= Seq(
+        Resolver.url("streaming-applications", url("https://pencilerazer.bintray.com/streaming-applications"))(Resolver.ivyStylePatterns),
+        "confluent".at ("https://packages.confluent.io/maven/")
+      ),
+      libraryDependencies ++= Seq(
+        "pencilerazer" %% "streaming-applications" % "0.2.0"
+      ),
+      runLocalConfigFile := Some("src/main/resources/local.conf")
+    )
 
 lazy val commonSettings = Seq(
   organization := "pencilerazer",
@@ -34,7 +50,6 @@ lazy val commonSettings = Seq(
     "-language:_",
     "-unchecked"
   ),
-
   scalacOptions in (Compile, console) --= Seq("-Ywarn-unused", "-Ywarn-unused-import"),
   scalacOptions in (Test, console) := (scalacOptions in (Compile, console)).value
 )

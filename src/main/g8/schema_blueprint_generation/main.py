@@ -7,14 +7,14 @@ import copy
 import os.path as op
 
 SCHEMA_FOLDER = op.join(op.dirname(
-    op.dirname(op.abspath(__file__))), "streaming_pipelines/src/main/avro/")
+    op.dirname(op.abspath(__file__))), "src/main/avro/")
 BLUEPRINT_FOLDER = op.join(op.dirname(op.dirname(
-    op.abspath(__file__))), "streaming_pipelines/src/main/blueprint/")
+    op.abspath(__file__))), "src/main/blueprint/")
 RESOURCES_FOLDER = op.join(op.dirname(op.dirname(
-    op.abspath(__file__))), "streaming_pipelines/src/main/resources/")
+    op.abspath(__file__))), "src/main/resources/")
 JSON_FOLDER = op.dirname(op.dirname(op.abspath(__file__)))
 CODEGEN_PATH = op.join(op.dirname(op.dirname(
-    op.abspath(__file__))), "codegen/src/main/resources/streamlets_info.json")
+    op.abspath(__file__))), "src/main/resources/streamlets_info.json")
 
 
 def read_config(path):
