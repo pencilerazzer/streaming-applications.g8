@@ -25,11 +25,11 @@ lazy val `$name;format="norm"$` =  (project in file("."))
     .settings(
       commonSettings,
       resolvers ++= Seq(
-        Resolver.url("streaming-applications", url("https://pencilerazer.bintray.com/streaming-applications"))(Resolver.ivyStylePatterns),
+        Resolver.file("streaming-applications", file("/home/rohit/.ivy2/local/pencilerazer"))(Resolver.ivyStylePatterns),
         "confluent".at ("https://packages.confluent.io/maven/")
       ),
       libraryDependencies ++= Seq(
-        "pencilerazer" %% "streaming-applications" % "0.2.0-0.0.1"
+        "pencilerazer" %% "streaming-applications" % "0.2.0-SNAPSHOT"
       ),
       runLocalConfigFile := Some("src/main/resources/local.conf")
     )
