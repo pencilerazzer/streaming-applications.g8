@@ -25,7 +25,7 @@ lazy val `$name;format="norm"$` =  (project in file("."))
     .settings(
       commonSettings,
       resolvers ++= Seq(
-        Resolver.file("streaming-applications", file("/home/rohit/.ivy2/local/pencilerazer"))(Resolver.ivyStylePatterns),
+        Resolver.file("streaming-applications", file("/home/$user$/.ivy2/local/pencilerazer"))(Resolver.ivyStylePatterns),
         "confluent".at ("https://packages.confluent.io/maven/")
       ),
       libraryDependencies ++= Seq(
