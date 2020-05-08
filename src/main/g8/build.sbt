@@ -9,7 +9,7 @@ lazy val codegen = project.settings(
 )
 
 val user_uri = sys.env.get("USER") match {
-  case Some(value) => s"/home/${value}"
+  case Some(value) => s"/home/\${value}"
   case _ => "/root"
 }
 
@@ -30,7 +30,7 @@ lazy val `$name;format="norm"$` =  (project in file("."))
     .settings(
       commonSettings,
       resolvers ++= Seq(
-        Resolver.file("streaming-applications", file(s"${user_uri}/.ivy2/local/pencilerazer"))(Resolver.ivyStylePatterns),
+        Resolver.file("streaming-applications", file(s"\${user_uri}/.ivy2/local/pencilerazer"))(Resolver.ivyStylePatterns),
         "confluent".at ("https://packages.confluent.io/maven/")
       ),
       libraryDependencies ++= Seq(
