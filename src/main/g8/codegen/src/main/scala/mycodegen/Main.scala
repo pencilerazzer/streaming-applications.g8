@@ -26,7 +26,7 @@ object Main {
         // Do scala.meta code generation here.
         val str = streamletsInfoSupports.streamlets.foldLeft(
           """
-            |package applications
+            |package applications.$name$
             |import applications._
             |import cloudflow.spark.sql.SQLImplicits._
             |""".stripMargin)((total, next) => {
