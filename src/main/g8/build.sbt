@@ -29,7 +29,7 @@ lazy val `$name;format="norm"$` =  (project in file("."))
         "confluent".at ("https://packages.confluent.io/maven/")
       ),
       libraryDependencies ++= Seq(
-        "pencilerazer" %% "streaming-applications" % "0.2.1"
+        "pencilerazer" %% "streaming-applications" % "0.2.1-43a793e"
       ),
       runLocalConfigFile := Some("src/main/resources/local.conf")
     )
